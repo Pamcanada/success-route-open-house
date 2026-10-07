@@ -1,0 +1,3 @@
+export type Utm={utmSource:string;utmMedium:string;utmCampaign:string;utmContent:string;utmTerm:string};
+export function readTracking(q:URLSearchParams):Utm{return{utmSource:q.get("utm_source")||"",utmMedium:q.get("utm_medium")||"",utmCampaign:q.get("utm_campaign")||"",utmContent:q.get("utm_content")||"",utmTerm:q.get("utm_term")||""}}
+export function track(name:string,params:Record<string,unknown>={}){if(typeof window==="undefined")return;const w=window as unknown as {dataLayer?:unknown[];fbq?:(...a:unknown[])=>void;ttq?:{track?:(n:string,p:Record<string,unknown>)=>void}};w.dataLayer?.push({event:name,...params});w.fbq?.("trackCustom",name,params);w.ttq?.track?.(name,params)}

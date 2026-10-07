@@ -1,0 +1,2 @@
+# Apps Script setup
+Create a Google Sheet, open Extensions → Apps Script, paste `Code.gs`, and run `setupSheets()` once. In `EventSettings`, enter the real Start Time and End Time for each date. Deploy as a Web App, execute as yourself, choose access appropriate for public website submissions, and copy the `/exec` URL to `NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL`. After changing Apps Script, deploy a new version.

@@ -1,0 +1,2 @@
+export async function getEvents(url:string){if(!url)throw new Error("Apps Script URL not configured");const r=await fetch(`${url}?action=events`,{cache:"no-store"});if(!r.ok)throw new Error("Could not load event settings");return r.json()}
+export async function submitRegistration(url:string,data:unknown){if(!url)throw new Error("Apps Script URL not configured");const r=await fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});if(!r.ok)throw new Error("Registration service unavailable");return r.json()}

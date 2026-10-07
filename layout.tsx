@@ -1,0 +1,3 @@
+import type {Metadata} from "next";import "./globals.css";
+export const metadata:Metadata={title:"Free Immigration Open House Canada | Success Route",description:"Register for Success Route's Free Immigration Open House in Brampton or Halifax and explore Canadian immigration pathways including Express Entry, PNP, Francophone and graduate pathways.",openGraph:{title:"FREE IMMIGRATION OPEN HOUSE | SUCCESS ROUTE",description:"Brampton & Halifax • October 2026 • Free Entry • Registration Required",images:["/images/open-house-social.jpg"]}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}

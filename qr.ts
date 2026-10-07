@@ -1,0 +1,2 @@
+import {eventConfig} from "@/config/eventConfig";
+export function qrLinks(){const base=eventConfig.registrationURL||"SET_REGISTRATION_URL";return{general:`${base}?utm_source=qr&utm_medium=offline&utm_campaign=october_open_house`,brampton:`${base}?location=brampton&utm_source=qr&utm_medium=offline&utm_campaign=brampton_october_open_house`,halifax:`${base}?location=halifax&utm_source=qr&utm_medium=offline&utm_campaign=halifax_october_open_house`}}
