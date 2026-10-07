@@ -1,1 +1,68 @@
-"use client";import {qrLinks} from "@/lib/qr";const rows=[['general','GENERAL REGISTRATION QR','success-route-open-house-qr'],['brampton','BRAMPTON QR','success-route-brampton-open-house-qr'],['halifax','HALIFAX QR','success-route-halifax-open-house-qr']] as const;export default function QRPage(){const links=qrLinks();return <main className="section"><div className="container"><h1 className="text-4xl font-black text-[var(--teal)]">Open House QR Codes</h1><p className="mt-3 text-slate-600">Generate assets after setting NEXT_PUBLIC_REGISTRATION_URL and running npm run generate:qr.</p><div className="mt-8 grid gap-6 md:grid-cols-3">{rows.map(([k,title,file])=><div className="card p-6" key={k}><h2 className="font-black">{title}</h2><img className="mx-auto mt-4 aspect-square w-full max-w-72" src={`/qr/${file}.svg`} alt={title}/><p className="mt-4 break-all text-xs">{links[k]}</p><div className="mt-4 flex flex-wrap gap-2"><a className="btn btn-primary" download href={`/qr/${file}.png`}>DOWNLOAD PNG</a><a className="btn btn-secondary" download href={`/qr/${file}.svg`}>DOWNLOAD SVG</a><button className="btn btn-secondary" onClick={()=>navigator.clipboard.writeText(links[k])}>COPY LINK</button></div></div>)}</div></div></main>}
+"use client";
+import { qrLinks } from "@/lib/qr";
+const rows = [
+  ["general", "GENERAL REGISTRATION QR", "success-route-open-house-qr"],
+  ["brampton", "BRAMPTON QR", "success-route-brampton-open-house-qr"],
+  ["halifax", "HALIFAX QR", "success-route-halifax-open-house-qr"],
+] as const;
+export default function QRPage() {
+  const links = qrLinks();
+  return (
+    <main className="section">
+      <div className="container">
+        <h1 className="text-4xl font-black text-[var(--teal)]">
+          Open House QR Codes
+        </h1>
+        <p className="mt-3 text-slate-600">
+          Generate assets after setting NEXT_PUBLIC_REGISTRATION_URL and running
+          npm run generate:qr.
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {rows.map(([k, title, file]) => (
+            <div className="card p-6" key={k}>
+              <h2 className="font-black">{title}</h2>
+              {links[k] ? (
+                <img
+                  className="mx-auto mt-4 aspect-square w-full max-w-72"
+                  src={`/qr/${file}.svg`}
+                  alt={title}
+                />
+              ) : (
+                <p className="mt-4 rounded-md bg-[var(--cream)] p-3 text-sm">
+                  QR code will activate when the registration URL is connected
+                </p>
+              )}
+              {links[k] && (
+                <>
+                  <p className="mt-4 break-all text-xs">{links[k]}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                <a
+                  className="btn btn-primary"
+                  download
+                  href={`/qr/${file}.png`}
+                >
+                  DOWNLOAD PNG
+                </a>
+                <a
+                  className="btn btn-secondary"
+                  download
+                  href={`/qr/${file}.svg`}
+                >
+                  DOWNLOAD SVG
+                </a>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => navigator.clipboard.writeText(links[k] ?? "")}
+                >
+                  COPY LINK
+                </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -1,2 +1,32 @@
-import {eventConfig} from "@/config/eventConfig";
-export function qrLinks(){const base=eventConfig.registrationURL||"SET_REGISTRATION_URL";return{general:`${base}?utm_source=qr&utm_medium=offline&utm_campaign=october_open_house`,brampton:`${base}?location=brampton&utm_source=qr&utm_medium=offline&utm_campaign=brampton_october_open_house`,halifax:`${base}?location=halifax&utm_source=qr&utm_medium=offline&utm_campaign=halifax_october_open_house`}}
+import { eventConfig } from "@/config/eventConfig";
+
+function registrationLink(location: "brampton" | "halifax" | null) {
+	const configuredUrl = eventConfig.registrationURL.trim();
+	if (!configuredUrl) return null;
+
+	try {
+		const url = new URL(configuredUrl);
+		if (url.protocol !== "https:" && url.protocol !== "http:") return null;
+
+		if (location) url.searchParams.set("location", location);
+		url.searchParams.set("utm_source", "qr");
+		url.searchParams.set("utm_medium", "offline");
+		url.searchParams.set(
+			"utm_campaign",
+			location
+				? `${location}_october_open_house`
+				: "october_open_house",
+		);
+		return url.toString();
+	} catch {
+		return null;
+	}
+}
+
+export function qrLinks() {
+	return {
+		general: registrationLink(null),
+		brampton: registrationLink("brampton"),
+		halifax: registrationLink("halifax"),
+	};
+}
